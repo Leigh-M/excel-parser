@@ -1,11 +1,11 @@
 const fs = require('fs');
 
-const getDirFiles = (path, extension) => {
+const getDirFiles = path => {
     const files = fs.readdirSync(path);
 
     console.log(files);
     // return files.filter(file => file.match(new RegExp(`.*.(${ extension })`, 'ig')));
 };
 
-console.log(getDirFiles('./excels/ExcelswithData', '.xlsx'));
+getDirFiles('./excels');
 // module.exports = getDirFiles;

@@ -1,6 +1,6 @@
 const XLSX = require('xlsx');
 
-const workbook = XLSX.readFile('testData/250.xlsx');
+const workbook = XLSX.readFile('testData/Copy of Excel76.xls');
 const worksheet = workbook.Sheets.Sheet1;
 const gridSize = worksheet['!ref'];
 const [range] = gridSize.match(/[A-Z]\d+$/g);
@@ -28,7 +28,6 @@ for (let row = 2; row <= rowsLength; row++) {
         ) {
             const cellValue = worksheet[`${ colsMap[col] }${ row }`].v;
             rowData.push(cellValue);
-            console.log('cellValue => ', cellValue);
         } else {
             rowData.push('');
         }
