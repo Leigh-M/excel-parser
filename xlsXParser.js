@@ -5,6 +5,9 @@ const getDirFiles = require('./getDirFiles');
 const files = getDirFiles('./testData');
 
 const excelData = [];
+const jobTitlesRegex = /python|node|nodejs|node\.js|javascript|react|mern stack/ig;
+// eslint-disable-next-line max-len
+const sectorRegex = /health|healthcare|medical|bioengineer|bio engineer|bioscience|bio science|genetic|genomics|biotech|bio tech|bio/ig;
 
 files.forEach(file => {
     const workbook = XLSX.readFile(`testData/${ file }`);
@@ -28,14 +31,22 @@ files.forEach(file => {
     for (let row = 2; row <= rowsLength; row++) {
         const rowData = [];
 
-        for (let col = 0; col < highestColIndex; col++) {
-            if (worksheet[`${ colsMap[col] }${ row }`] !== undefined
-                && worksheet[`${ colsMap[col] }${ row }`].v !== undefined
-            ) {
-                const cellValue = worksheet[`${ colsMap[col] }${ row }`].v;
-                rowData.push(cellValue);
-            } else {
-                rowData.push('');
+        if (jobTitlesRegex.test(worksheet[`C${ row }`].v)
+            && (sectorRegex.test(worksheet[`B${ row }`].v) || sectorRegex.test(worksheet[`C${ row }`].v))
+        ) {
+            for (let col = 0; col < highestColIndex; col++) {
+                if (worksheet[`B${ row }`] !== undefined
+                    && worksheet[`C${ row }`].v !== undefined
+                ) {
+                    if (worksheet[`${ colsMap[col] }${ row }`] !== undefined
+                    && worksheet[`${ colsMap[col] }${ row }`].v !== undefined
+                    ) {
+                        const cellValue = worksheet[`${ colsMap[col] }${ row }`].v;
+                        rowData.push(cellValue);
+                    } else {
+                        rowData.push('');
+                    }
+                }
             }
         }
 
