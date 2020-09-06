@@ -1,14 +1,14 @@
 {
   "name": "excel_parser",
   "version": "1.0.0",
-  "description": "",
+  "description": "Excel parser reads, parses and writes excel .xslx files",
   "main": "excelParser.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "exceljs": "^4.1.1"
+  "dependencies": {
+    "xlsx": "^0.16.6"
   }
 }
